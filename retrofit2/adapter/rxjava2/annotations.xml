@@ -1,0 +1,5 @@
+<root>
+    <item name='retrofit2.adapter.rxjava2.Result'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>

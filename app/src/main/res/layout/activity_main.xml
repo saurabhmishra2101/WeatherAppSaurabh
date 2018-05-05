@@ -1,18 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".detail.WeatherDetailActivity">
 
     <TextView
+        android:id="@+id/nametitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:text="Name: "
+       />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/namedesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/nametitle"
+        android:text="City Name"
+        />
+
+    <TextView
+        android:id="@+id/temptitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/nametitle"
+        android:text="Temp: "
+        />
+
+    <TextView
+        android:id="@+id/tempdesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/nametitle"
+        android:layout_below="@+id/nametitle"
+        android:text="00"
+        />
+
+    <TextView
+        android:id="@+id/weatherdescrtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/temptitle"
+        android:text="Description: "
+        />
+
+    <TextView
+        android:id="@+id/weatherdescrdesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/nametitle"
+        android:layout_below="@+id/temptitle"
+        android:text="00"
+        />
+
+    <TextView
+        android:id="@+id/pressuretitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/weatherdescrtitle"
+        android:text="Pressure: "
+        />
+
+    <TextView
+        android:id="@+id/pressuredesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/nametitle"
+        android:layout_below="@+id/weatherdescrtitle"
+        android:text="00"
+        />
+
+    <TextView
+        android:id="@+id/humiditytitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/pressuretitle"
+        android:text="Humidity: "
+        />
+
+    <TextView
+        android:id="@+id/humiditydesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/nametitle"
+        android:layout_below="@+id/pressuretitle"
+        android:text="00"
+        />
+
+</RelativeLayout>
