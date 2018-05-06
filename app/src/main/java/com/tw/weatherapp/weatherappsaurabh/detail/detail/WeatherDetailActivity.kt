@@ -1,9 +1,8 @@
-package com.tw.weatherapp.weatherappsaurabh.detail
+package com.tw.weatherapp.weatherappsaurabh.detail.detail
 
 import android.app.ProgressDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import com.android.volley.*
 import com.android.volley.toolbox.StringRequest
@@ -12,44 +11,58 @@ import com.tw.weatherapp.weatherappsaurabh.R
 import com.tw.weatherapp.weatherappsaurabh.detail.network.NetworkUtility
 import com.tw.weatherapp.weatherappsaurabh.detail.network.WeatherService
 import com.tw.weatherapp.weatherappsaurabh.detail.util.APIName
+import com.tw.weatherapp.weatherappsaurabh.detail.util.SingletonActivity
 import com.tw.weatherapp.weatherappsaurabh.detail.util.UtilsDialog
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.HashMap
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONArray
-
-private lateinit var presenter: DetailPresenter
-private val weatherService: WeatherService?= null
 
 
-class WeatherDetailActivity : AppCompatActivity(),DetailView {
+
+class WeatherDetailActivity : AppCompatActivity(),WeatherService {
+
 
     internal var util = UtilsDialog()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
+
         if (NetworkUtility.checkConnectivity(this@WeatherDetailActivity)) {
             val WeatherAPIURL = APIName.URL
             println("WEATHER URL IS---$WeatherAPIURL")
-            WeatherDetailAPI(WeatherAPIURL)
+            weatherDetailAPI(WeatherAPIURL)
 
         } else {
             util.dialog(this@WeatherDetailActivity, "Please check your internet connection.")
         }
 
 
-
     }
 
 
 
-    private fun WeatherDetailAPI(url: String) {
 
-        var pdia = ProgressDialog(this@WeatherDetailActivity)
+
+     override fun weatherDetailAPI(url: String) {
+
+
+
+     var pdia = ProgressDialog(this@WeatherDetailActivity)
 
         pdia.setMessage("Fetching Weather Information...")
         pdia.setCanceledOnTouchOutside(false)
@@ -59,7 +72,7 @@ class WeatherDetailActivity : AppCompatActivity(),DetailView {
         val stringRequest = object : StringRequest(Request.Method.GET, url,
                 Response.Listener { response ->
                     pdia.dismiss()
-                   
+
 
 
                     println("RESPONSE OF WEATHER DETAILS API IS---$response")
@@ -71,21 +84,22 @@ class WeatherDetailActivity : AppCompatActivity(),DetailView {
 
                         namedesc.text = WeatherJson.getString("name")
 
+                        tempdesc.text = WeatherJson.getJSONObject("main").getString("temp")
 
+                        pressuredesc.text = WeatherJson.getJSONObject("main").getString("pressure")
 
-
-
-
+                        humiditydesc.text = WeatherJson.getJSONObject("main").getString("humidity")
 
 
                     } catch (e: JSONException) {
                         e.printStackTrace()
-                        pdia.dismiss()
+                       pdia.dismiss()
+
                     }
 
 
 
-                    humiditydesc
+
 
 
 
@@ -94,6 +108,7 @@ class WeatherDetailActivity : AppCompatActivity(),DetailView {
                 Response.ErrorListener { error ->
 
                      pdia.dismiss();
+
 
                     VolleyLog.d("TAG", "Error: " + error.message)
                     val networkResponse = error.networkResponse
