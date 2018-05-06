@@ -1,6 +1,7 @@
 package com.tw.weatherapp.weatherappsaurabh.detail.detail
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -13,20 +14,21 @@ import com.tw.weatherapp.weatherappsaurabh.R
 import com.tw.weatherapp.weatherappsaurabh.detail.network.NetworkUtility
 import com.tw.weatherapp.weatherappsaurabh.detail.network.WeatherService
 import com.tw.weatherapp.weatherappsaurabh.detail.util.APIName
-import com.tw.weatherapp.weatherappsaurabh.detail.util.SingletonActivity
 import com.tw.weatherapp.weatherappsaurabh.detail.util.UtilsDialog
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.HashMap
 import kotlinx.android.synthetic.main.activity_main.*
-import android.support.v4.view.accessibility.AccessibilityEventCompat.setAction
 import android.view.View
+import com.tw.weatherapp.weatherappsaurabh.detail.util.SingletonActivity
+import rx.Single
 
 
 class WeatherDetailActivity : AppCompatActivity(),WeatherService {
 
 
     internal var util = UtilsDialog()
+
 
 
 
@@ -38,8 +40,12 @@ class WeatherDetailActivity : AppCompatActivity(),WeatherService {
         val fab = findViewById<View>(R.id.fab) as FloatingActionButton
         fab.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+               Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()
+
+
+                startActivity(Intent(this@WeatherDetailActivity, WeatherListActivity::class.java))
+
             }
         })
 
@@ -49,7 +55,7 @@ class WeatherDetailActivity : AppCompatActivity(),WeatherService {
     override fun onResume() {
         super.onResume()
 
-
+     SingletonActivity.city = "Bangalore";
 
         if (NetworkUtility.checkConnectivity(this@WeatherDetailActivity)) {
             val WeatherAPIURL = APIName.URL

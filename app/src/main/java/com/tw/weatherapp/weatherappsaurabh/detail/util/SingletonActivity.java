@@ -20,7 +20,7 @@ public class SingletonActivity extends Application {
 
     private RequestQueue mRequestQueue;
     public static final String TAG = SingletonActivity.class.getSimpleName();
-
+    public static String city = "";
 
 
     @Override
